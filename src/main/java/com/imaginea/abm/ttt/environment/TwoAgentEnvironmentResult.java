@@ -8,7 +8,7 @@ public class TwoAgentEnvironmentResult implements EnvironmentResult {
 	private final Agent winner;
 	private final Agent loser;
 
-	public TwoAgentEnvironmentResult(Agent winner, Agent loser) {
+	protected TwoAgentEnvironmentResult(Agent winner, Agent loser) {
 		this.winner = winner;
 		this.loser = loser;
 	}

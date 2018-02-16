@@ -13,7 +13,7 @@ public class GridEnvironment implements Environment {
 	private Agent[][] agentMap;
 	private Agent[] agents;
 
-	public GridEnvironment(int rows, int cols) {
+	protected GridEnvironment(int rows, int cols) {
 		agentMap = new Agent[rows][cols];
 	}
 

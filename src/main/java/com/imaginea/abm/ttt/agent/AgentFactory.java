@@ -6,6 +6,9 @@ import com.imaginea.abm.ttt.Environment;
 
 public class AgentFactory {
 
+	private AgentFactory() {
+	}
+
 	public static Agent agent(Behaviour behaviour, Environment environment, String name) {
 		return new SampleAgent(behaviour, environment, name);
 	}

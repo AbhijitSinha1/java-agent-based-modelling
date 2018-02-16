@@ -11,7 +11,7 @@ public class SampleAgent implements Agent {
 	private final Environment environment;
 	private String agentName;
 
-	public SampleAgent(Behaviour behaviour, Environment environment, String agentName) {
+	protected SampleAgent(Behaviour behaviour, Environment environment, String agentName) {
 		this.behaviour = behaviour;
 		this.environment = environment;
 		this.agentName = agentName;
