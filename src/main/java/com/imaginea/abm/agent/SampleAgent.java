@@ -1,9 +1,9 @@
-package com.imaginea.abm.ttt.agent;
+package com.imaginea.abm.agent;
 
-import com.imaginea.abm.ttt.Agent;
-import com.imaginea.abm.ttt.AgentAction;
-import com.imaginea.abm.ttt.Behaviour;
-import com.imaginea.abm.ttt.Environment;
+import com.imaginea.abm.Agent;
+import com.imaginea.abm.AgentAction;
+import com.imaginea.abm.Behaviour;
+import com.imaginea.abm.Environment;
 
 public class SampleAgent implements Agent {
 

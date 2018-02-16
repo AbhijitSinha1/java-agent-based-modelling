@@ -1,12 +1,12 @@
-package com.imaginea.abm.ttt.environment;
+package com.imaginea.abm.environment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.imaginea.abm.ttt.Agent;
-import com.imaginea.abm.ttt.AgentAction;
-import com.imaginea.abm.ttt.Environment;
-import com.imaginea.abm.ttt.action.GridAction;
+import com.imaginea.abm.Agent;
+import com.imaginea.abm.AgentAction;
+import com.imaginea.abm.Environment;
+import com.imaginea.abm.action.GridAction;
 
 public class GridEnvironment implements Environment {
 

@@ -1,7 +1,7 @@
-package com.imaginea.abm.ttt.environment;
+package com.imaginea.abm.environment;
 
-import com.imaginea.abm.ttt.Agent;
-import com.imaginea.abm.ttt.EnvironmentResult;
+import com.imaginea.abm.Agent;
+import com.imaginea.abm.EnvironmentResult;
 
 public class TwoAgentEnvironmentResult implements EnvironmentResult {
 

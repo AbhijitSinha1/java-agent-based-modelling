@@ -1,7 +1,7 @@
-package com.imaginea.abm.ttt.action;
+package com.imaginea.abm.action;
 
-import com.imaginea.abm.ttt.Agent;
-import com.imaginea.abm.ttt.AgentAction;
+import com.imaginea.abm.Agent;
+import com.imaginea.abm.AgentAction;
 
 public class GridAction implements AgentAction {
 

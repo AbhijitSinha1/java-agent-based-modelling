@@ -1,6 +1,6 @@
-package com.imaginea.abm.ttt.environment;
+package com.imaginea.abm.environment;
 
-import com.imaginea.abm.ttt.Environment;
+import com.imaginea.abm.Environment;
 
 public class EnvironmentFactory {
 

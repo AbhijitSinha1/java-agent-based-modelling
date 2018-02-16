@@ -1,10 +1,15 @@
 package com.imaginea.abm.ttt;
 
-import com.imaginea.abm.ttt.agent.AgentFactory;
-import com.imaginea.abm.ttt.behaviour.BehaviourFactory;
-import com.imaginea.abm.ttt.environment.EnvironmentFactory;
-import com.imaginea.abm.ttt.environment.EnvironmentResultFactory;
-import com.imaginea.abm.ttt.environment.GridEnvironment;
+import com.imaginea.abm.Agent;
+import com.imaginea.abm.AgentAction;
+import com.imaginea.abm.Environment;
+import com.imaginea.abm.EnvironmentCompleteLogic;
+import com.imaginea.abm.EnvironmentResult;
+import com.imaginea.abm.agent.AgentFactory;
+import com.imaginea.abm.behaviour.BehaviourFactory;
+import com.imaginea.abm.environment.EnvironmentFactory;
+import com.imaginea.abm.environment.EnvironmentResultFactory;
+import com.imaginea.abm.environment.GridEnvironment;
 
 public class TicTacToe {
 

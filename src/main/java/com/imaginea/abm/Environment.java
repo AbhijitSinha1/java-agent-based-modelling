@@ -1,4 +1,4 @@
-package com.imaginea.abm.ttt;
+package com.imaginea.abm;
 
 import java.util.List;
 

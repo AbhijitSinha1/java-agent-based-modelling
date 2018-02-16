@@ -1,6 +1,6 @@
-package com.imaginea.abm.ttt.behaviour;
+package com.imaginea.abm.behaviour;
 
-import com.imaginea.abm.ttt.Behaviour;
+import com.imaginea.abm.Behaviour;
 
 public class BehaviourFactory {
 

@@ -1,4 +1,4 @@
-package com.imaginea.abm.ttt;
+package com.imaginea.abm;
 
 public interface EnvironmentCompleteLogic {
 	boolean done(Environment environment);

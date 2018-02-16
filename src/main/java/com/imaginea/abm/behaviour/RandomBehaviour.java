@@ -1,9 +1,9 @@
-package com.imaginea.abm.ttt.behaviour;
+package com.imaginea.abm.behaviour;
 
 import java.util.List;
 
-import com.imaginea.abm.ttt.AgentAction;
-import com.imaginea.abm.ttt.Behaviour;
+import com.imaginea.abm.AgentAction;
+import com.imaginea.abm.Behaviour;
 
 public class RandomBehaviour implements Behaviour {
 	protected RandomBehaviour() {
