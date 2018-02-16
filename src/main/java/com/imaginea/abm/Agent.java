@@ -2,6 +2,12 @@ package com.imaginea.abm;
 
 public interface Agent {
 
-	AgentAction getNextAction();
+	default AgentAction getNextAction() {
+		return getBehaviour().selectAction(getEnvironment().getAllowedActions(this));
+	}
 
+	Behaviour getBehaviour();
+
+	Environment getEnvironment();
+	
 }
