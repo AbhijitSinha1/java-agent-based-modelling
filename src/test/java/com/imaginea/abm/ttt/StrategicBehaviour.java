@@ -10,82 +10,147 @@ import com.imaginea.abm.action.GridAction;
 public class StrategicBehaviour implements Behaviour {
 
 	private final Agent[][] agentMap;
+	private Agent agent;
+	private Agent opponent;
 
 	public StrategicBehaviour(Agent[][] agentMap) {
+		if (agentMap.length != 3 || agentMap[0].length != 3) {
+			throw new RuntimeException("This behaviour is only applicable for 3 X 3 map");
+		}
 		this.agentMap = agentMap;
+	}
+
+	public void setAgent(Agent agent) {
+		if (this.agent != null) {
+			return;
+		}
+		this.agent = agent;
+
+	}
+
+	public void setOpponent(Agent agent) {
+		if (this.opponent != null) {
+			return;
+		}
+		this.opponent = agent;
+
 	}
 
 	@Override
 	public AgentAction selectAction(List<AgentAction> actions) {
-		int minCount = Integer.MAX_VALUE;
-		int posI = -1;
-		int posJ = -1;
+		if (this.agent == null || this.opponent == null) {
+			throw new RuntimeException("Plaese provide the player for this behaviour and its opponent");
+		}
 
+		// check if your game is completing in the next move
 		for (int i = 0; i < agentMap.length; i++) {
-			int count = 0;
-			int loc = -1;
 			for (int j = 0; j < agentMap[i].length; j++) {
-				count += agentMap[i][j] == null ? 1 : 0;
-				loc = agentMap[i][j] == null ? j : loc;
-			}
-			if (minCount > count && count > 0) {
-				minCount = count;
-				posI = i;
-				posJ = loc;
-			}
-		}
-
-		for (int j = 0; j < agentMap[0].length; j++) {
-			int count = 0;
-			int loc = -1;
-			for (int i = 0; i < agentMap.length; i++) {
-				count += agentMap[i][j] == null ? 1 : 0;
-				loc = agentMap[i][j] == null ? j : loc;
-			}
-			if (minCount > count && count > 0) {
-				minCount = count;
-				posJ = j;
-				posI = loc;
+				if (agentMap[i][j] != null) {
+					continue;
+				}
+				if (isRowCompleting(agent, i, j)) {
+					return new GridAction(agent, i, j);
+				}
+				if (isColCompleting(agent, i, j)) {
+					return new GridAction(agent, i, j);
+				}
+				if (isDiag1Completing(agent, i, j)) {
+					return new GridAction(agent, i, j);
+				}
+				if (isDiag2Completing(agent, i, j)) {
+					return new GridAction(agent, i, j);
+				}
 			}
 		}
 
-		int countDiagonal1 = 0;
-		int locDiagonal1 = -1;
+		// check if other's game is completing in the next move
 		for (int i = 0; i < agentMap.length; i++) {
-			countDiagonal1 += agentMap[i][i] == null ? 1 : 0;
-			locDiagonal1 = agentMap[i][i] == null ? i : locDiagonal1;
-		}
-		if (minCount > countDiagonal1 && countDiagonal1 > 0) {
-			minCount = countDiagonal1;
-			posI = locDiagonal1;
-			posJ = locDiagonal1;
-		}
-
-		int countDiagonal2 = 0;
-		int locDiagonal2 = -1;
-		for (int i = 0; i < agentMap.length; i++) {
-			int j = agentMap.length - 1 - i;
-			countDiagonal2 += agentMap[i][j] == null ? 1 : 0;
-			locDiagonal2 = agentMap[i][j] == null ? i : locDiagonal2;
-		}
-		if (minCount > countDiagonal2 && countDiagonal2 > 0) {
-			minCount = countDiagonal2;
-			posI = locDiagonal2;
-			posJ = agentMap.length - 1 - locDiagonal2;
+			for (int j = 0; j < agentMap[i].length; j++) {
+				if (agentMap[i][j] != null) {
+					continue;
+				}
+				if (isRowCompleting(opponent, i, j)) {
+					return new GridAction(opponent, i, j);
+				}
+				if (isColCompleting(opponent, i, j)) {
+					return new GridAction(opponent, i, j);
+				}
+				if (isDiag1Completing(opponent, i, j)) {
+					return new GridAction(opponent, i, j);
+				}
+				if (isDiag2Completing(opponent, i, j)) {
+					return new GridAction(opponent, i, j);
+				}
+			}
 		}
 
-		final int I = posI, J = posJ;
+		// random
+		return actions.get((int) (actions.size() * Math.random()));
 
-		System.out.println(String.format("[StrategicBehaviour:: min: %s | I: %s | J: %s]", minCount, I, J));
-
-		return actions.stream().filter(a -> {
-			GridAction action = (GridAction) a;
-			int col = action.getCol();
-			int row = action.getRow();
-			return col == J && row == I;
-		}).findFirst().orElse(actions.get((int) (actions.size() * Math.random())));
 	}
 
+	private boolean isDiag2Completing(Agent a, int x, int y) {
+		if(x + y + 1 != 3) {
+			return false;
+		}
+		int count = 0;
+		for (int i = x - 2; i < x + 2; i++) {
+			if (i < 0 || i >= agentMap.length) {
+				continue;
+			}
+			int j = 2 - i;
+			if (agentMap[i][j] != null && agentMap[i][j].equals(a)) {
+				count++;
+			}
+		}
+		return count > 1;
+	}
+
+	private boolean isDiag1Completing(Agent a, int x, int y) {
+		if(x != y) {
+			return false;
+		}
+		int count = 0;
+		for (int i = x - 2; i < x + 2; i++) {
+			if (i < 0 || i >= agentMap.length) {
+				continue;
+			}
+			int j = i;
+			if (agentMap[i][j] != null && agentMap[i][j].equals(a)) {
+				count++;
+			}
+		}
+		return count > 1;
+	}
+
+	private boolean isColCompleting(Agent a, int x, int y) {
+		int count = 0;
+		for (int i = x - 2; i < x + 2; i++) {
+			if (i < 0 || i >= agentMap.length) {
+				continue;
+			}
+			int j = y;
+			if (agentMap[i][j] != null && agentMap[i][j].equals(a)) {
+				count++;
+			}
+		}
+		return count > 1;
+	}
+
+	private boolean isRowCompleting(Agent a, int x, int y) {
+		int count = 0;
+		for (int j = y - 2; j < y + 2; j++) {
+			if (j < 0 || j >= agentMap.length) {
+				continue;
+			}
+			int i = x;
+			if (agentMap[i][j] != null && agentMap[i][j].equals(a)) {
+				count++;
+			}
+		}
+		return count > 1;
+	}
+	
 	// getter methods
 	// ------------------------------------------------------------------------
 
