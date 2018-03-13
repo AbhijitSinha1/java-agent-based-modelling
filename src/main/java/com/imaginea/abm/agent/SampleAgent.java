@@ -37,4 +37,20 @@ public class SampleAgent implements Agent {
 		return String.format("[SampleAgent:: name: %s]", agentName);
 	}
 	
+	@Override
+	public int hashCode() {
+		return agentName.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) {
+			return false;
+		}
+		if(!(obj instanceof SampleAgent)) {
+			return false;
+		}
+		SampleAgent agent = (SampleAgent) obj;
+		return agent.agentName.equals(agentName) && agent.getEnvironment().equals(environment) && agent.getBehaviour().equals(behaviour);
+	}
 }
